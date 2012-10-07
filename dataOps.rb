@@ -1,22 +1,4 @@
-#!/home/kalle/.rvm/rubies/ruby-1.9.3-p125/bin/ruby -w
-#Read file to matrix, strip end of line
-def file2Mtx(inFile,separator)
-  file = File.new(inFile,'r')
-  returnMatrix = Hash.new
-  lines = 0
-  y = 0
-  while  (line = file.gets)
-    if lines > 0
-      returnMatrix[y] = line.strip.split(separator)
-      y+=1
-    end
-    lines+=1
-  end
-  file.close
-  return returnMatrix
-end
-
-#Convert strings in csv file to floats
+#Convert strings in hash of arrays to floats
 def mtx2num(matrix)
   matrix.each_entry{|key,array|
     matrix[key] = array.map do |value|
@@ -35,7 +17,7 @@ def mtx2num(matrix)
 end
 
 
-#Adjust "mon" to 1 etc
+#Adjust "mon" to 1 etc Hash of arrays
 def adjustWeekDay(matrix,column)
   matrix.each{|key,array|
     case array[column]
@@ -58,7 +40,7 @@ def adjustWeekDay(matrix,column)
   return matrix
 end
 
-#Adjust "jan" to 1 etc
+#Adjust "jan" to 1 etc Hash of arrays
 def adjustMonth(matrix,column)
 
   matrix.each{|key,array|
